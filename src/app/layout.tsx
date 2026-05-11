@@ -7,7 +7,7 @@ import Sidebar from "@/components/Sidebar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "OpsPilot | Karabük Organik Kooperatifi",
+  title: "KoopPilot | Karabük Organik Kooperatifi",
   description: "Yapay Zeka Destekli Operasyon Asistanı",
 };
 

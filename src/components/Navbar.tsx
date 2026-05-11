@@ -7,7 +7,7 @@ export default function Navbar() {
         <div className="bg-white/10 p-1.5 rounded-lg">
           <Bot size={24} />
         </div>
-        <span className="text-xl font-black tracking-tight">OpsPilot</span>
+        <span className="text-xl font-black tracking-tight">KoopPilot</span>
       </div>
       
       <div className="hidden md:block text-xs font-bold text-white/50 uppercase tracking-widest">
