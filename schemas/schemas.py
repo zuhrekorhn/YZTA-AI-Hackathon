@@ -26,3 +26,12 @@ class ChatMessage(BaseModel):
 class ManagerChatMessage(BaseModel):
     message: str
     session_id: str
+class StockUpdate(BaseModel):
+    new_stock: float
+
+class NewOrder(BaseModel):
+    customer_name: str
+    customer_phone: Optional[str] = None
+    product_id: int
+    quantity: float
+    estimated_delivery: Optional[date] = None
