@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bal-bg: #FDF8F0;
+  --color-bal-primary: #5A3010;
+  --color-bal-accent: #D4960A;
+  --color-bal-success: #3A7040;
+  --color-bal-danger: #B83020;
+  --color-bal-border: #E0CEAA;
+  --color-bal-surface: #F5EDD8;
+  --color-bal-text-muted: #806040;
+  --color-bal-text-main: #3A1A00;
+}
+
+:root {
+  --background: #FDF8F0;
+  --foreground: #3A1A00;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-bal-primary text-white px-6 py-2.5 rounded-xl font-bold transition-all hover:opacity-90 active:scale-95;
+  }
+  
+  .btn-accent {
+    @apply bg-bal-accent text-white px-6 py-2.5 rounded-xl font-bold transition-all hover:opacity-90 active:scale-95;
+  }
+  
+  .card {
+    @apply bg-white p-6 rounded-2xl border border-bal-border shadow-sm;
+  }
+  
+  .input-field {
+    @apply w-full bg-bal-surface border-none rounded-xl px-4 py-3 text-bal-text-main placeholder:text-bal-text-muted focus:ring-2 focus:ring-bal-accent/20 outline-none transition-all;
+  }
+
+  /* Status Badges */
+  .badge {
+    @apply px-3 py-1 rounded-full text-xs font-bold tracking-tight;
+  }
+  
+  .badge-success {
+    @apply bg-[#EEF7EE] text-[#2A5030];
+  }
+  
+  .badge-warning {
+    @apply bg-[#FEF8E0] text-[#906810];
+  }
+  
+  .badge-danger {
+    @apply bg-[#FDEDEC] text-[#8A2010];
+  }
+}
+
+/* AI Answer Block */
+.ai-answer-block {
+  @apply border-l-4 border-bal-accent bg-[#FEF8E8] p-4 rounded-r-xl;
+}
+
+/* Chat Bubbles */
+.bubble-customer {
+  @apply bg-bal-surface text-bal-text-main rounded-2xl rounded-tl-none p-4 shadow-sm;
+}
+
+.bubble-ai {
+  @apply bg-bal-primary text-white rounded-2xl rounded-tr-none p-4 shadow-md;
+}
+
+/* Autopilot Indicator */
+.autopilot-banner {
+  @apply bg-[#EEF7EE] text-[#2A5030] py-1 px-4 text-[10px] font-black uppercase text-center;
+}
