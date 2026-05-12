@@ -26,12 +26,13 @@ export default function Dashboard() {
     setTimeout(() => {
       let response = "Merhaba! Hemen bakıyorum... ";
       if (query.toLowerCase().includes("sat")) {
-        response += "Bu hafta Bal satışları çok iyi gidiyor! Tam 42 adet satıldı. Harika!";
-      } else if (query.toLowerCase().includes("stok") || query.toLowerCase().includes("domates")) {
-        response += "Domates azalmış (12kg kalmış). İstersen hemen 80kg sipariş verebiliriz.";
+        response += "Bu hafta satışlarınız %15 artış gösterdi! Harika!";
+      } else if (query.toLowerCase().includes("stok")) {
+        response += "Bazı ürünlerinizin stoğu azalmış görünüyor. İsterseniz hemen tedarik listesi hazırlayabilirim.";
       } else {
-        response += "Her şey yolunda! İşler tıkırında gidiyor.";
+        response += "Şu an için her şey yolunda görünüyor.";
       }
+
       setAiResponse(response);
       setIsTyping(false);
     }, 1200);
@@ -45,11 +46,11 @@ export default function Dashboard() {
         <div className="relative z-10 space-y-2">
           <div className="flex items-center gap-2 text-bal-accent font-bold text-xs uppercase tracking-widest">
             <Sparkles size={14} />
-            <span>Gemini Hazırladı</span>
+            <span>Sistem Özeti</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-black text-bal-primary leading-tight">
-            Günaydın! Bugün <span className="underline decoration-bal-accent underline-offset-8 decoration-4">{DASHBOARD_STATS.newOrders} yeni sipariş</span> var. 
-            Domates stoğu kritik seviyede. 2 kargo gecikiyor.
+            Hoş geldiniz! <span className="underline decoration-bal-accent underline-offset-8 decoration-4">Operasyonlar</span> sorunsuz devam ediyor. 
+            Verimlilik artışı için AI asistanını kullanabilirsiniz.
           </h1>
         </div>
       </section>
@@ -57,10 +58,10 @@ export default function Dashboard() {
       {/* Metric Cards */}
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "Yeni Siparişler", val: DASHBOARD_STATS.newOrders, sub: `Dün: ${DASHBOARD_STATS.yesterdayOrders}`, icon: ShoppingBag },
-          { label: "Kargolanan", val: DASHBOARD_STATS.shipped, sub: `${DASHBOARD_STATS.waitingOrders} bekliyor`, icon: Truck },
-          { label: "Stok Uyarısı", val: DASHBOARD_STATS.stockWarnings, sub: "Kritik ürün", icon: AlertTriangle, isWarning: true },
-          { label: "Müşteri Mesajı", val: DASHBOARD_STATS.messages, sub: `${DASHBOARD_STATS.autoReplied} otomatik yanıt`, icon: MessageSquare },
+          { label: "Yeni Siparişler", val: 0, sub: `Dün: 0`, icon: ShoppingBag },
+          { label: "Kargolanan", val: 0, sub: `0 bekliyor`, icon: Truck },
+          { label: "Stok Uyarısı", val: 0, sub: "Tüm stoklar normal", icon: AlertTriangle, isWarning: false },
+          { label: "Müşteri Mesajı", val: 0, sub: `0 otomatik yanıt`, icon: MessageSquare },
         ].map((stat, i) => (
           <div key={i} className="bg-bal-surface/50 p-6 rounded-2xl border border-bal-border hover:shadow-md transition-all">
             <div className="flex justify-between items-start mb-4">
@@ -80,53 +81,22 @@ export default function Dashboard() {
         {/* Son Siparişler */}
         <section className="card">
           <h3 className="text-lg font-black text-bal-primary mb-6">Son Siparişler</h3>
-          <div className="space-y-4">
-            {RECENT_ORDERS.map((order) => (
-              <div key={order.id} className="flex items-center justify-between p-3 rounded-xl hover:bg-bal-surface transition-colors border-b border-bal-surface last:border-0">
-                <div className="space-y-1">
-                  <div className="text-sm font-black text-bal-text-main">{order.customer}</div>
-                  <div className="text-[10px] text-bal-text-muted font-bold uppercase tracking-tight">{order.product} <span className="mx-1">·</span> {order.id}</div>
-                </div>
-                <span className={`badge ${
-                  order.statusColor === 'success' ? 'badge-success' : 
-                  order.statusColor === 'warning' ? 'badge-warning' : 
-                  'badge-danger'
-                }`}>
-                  {order.status}
-                </span>
-              </div>
-            ))}
+          <div className="flex flex-col items-center justify-center py-12 text-center space-y-3 opacity-50">
+            <ShoppingBag size={48} className="text-bal-text-muted" />
+            <p className="text-sm font-bold text-bal-text-muted">Henüz sipariş kaydı bulunmuyor.</p>
           </div>
         </section>
 
         {/* Stok Durumu */}
         <section className="card">
           <h3 className="text-lg font-black text-bal-primary mb-6">Stok Durumu</h3>
-          <div className="space-y-6">
-            {STOCK_STATUS.map((item) => {
-              const percentage = (item.level / 100) * 100;
-              let barColor = "bg-bal-success";
-              if (percentage < 25) barColor = "bg-bal-danger";
-              else if (percentage < 50) barColor = "bg-bal-accent";
-
-              return (
-                <div key={item.name} className="space-y-2">
-                  <div className="flex justify-between text-xs font-black text-bal-text-main">
-                    <span>{item.name}</span>
-                    <span className="text-bal-text-muted">{item.quantity}</span>
-                  </div>
-                  <div className="h-2.5 w-full bg-bal-surface rounded-full overflow-hidden border border-bal-border/30">
-                    <div 
-                      className={`h-full ${barColor} transition-all duration-1000`} 
-                      style={{ width: `${percentage}%` }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
+          <div className="flex flex-col items-center justify-center py-12 text-center space-y-3 opacity-50">
+            <AlertTriangle size={48} className="text-bal-text-muted" />
+            <p className="text-sm font-bold text-bal-text-muted">Stok verisi bulunmuyor.</p>
           </div>
         </section>
       </div>
+
 
       {/* AI Asistanı Card */}
       <section className="card bg-bal-surface/30 border-2 border-bal-accent/10">

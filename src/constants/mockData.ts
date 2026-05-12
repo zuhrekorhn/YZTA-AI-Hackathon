@@ -23,11 +23,12 @@ export const STOCK_STATUS = [
 ];
 
 export const INVENTORY_ITEMS = [
-  { id: 1, name: "Süzme Bal (850g)", stock: 45, threshold: 10, unit: "adet" },
-  { id: 2, name: "Kuru İncir (1kg)", stock: 8, threshold: 15, unit: "paket" },
-  { id: 3, name: "Domates Salçası", stock: 12, threshold: 20, unit: "kavanoz" },
-  { id: 4, name: "Soğuk Sıkım Zeytinyağı (5L)", stock: 22, threshold: 5, unit: "teneke" },
+  { id: 1, name: "Süzme Bal (850g)", stock: 45, threshold: 10, unit: "adet", unitCost: 120 },
+  { id: 2, name: "Kuru İncir (1kg)", stock: 8, threshold: 15, unit: "paket", unitCost: 85 },
+  { id: 3, name: "Domates Salçası", stock: 12, threshold: 20, unit: "kavanoz", unitCost: 45 },
+  { id: 4, name: "Soğuk Sıkım Zeytinyağı (5L)", stock: 22, threshold: 5, unit: "teneke", unitCost: 450 },
 ];
+
 
 export const SHIPMENTS = [
   { id: "#1847", customer: "Ayşe Yılmaz", company: "Yurtiçi", trackNo: "YT123456789", date: "Bugün", status: "Yolda" },

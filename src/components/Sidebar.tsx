@@ -7,8 +7,11 @@ import {
   ShoppingBag, 
   Box, 
   Truck, 
-  MessageSquare 
+  MessageSquare,
+  UserCircle,
+  LogOut
 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const navItems = [
   { name: "Ana Sayfa", href: "/", icon: LayoutDashboard },
@@ -16,10 +19,12 @@ const navItems = [
   { name: "Stok", href: "/stok", icon: Box },
   { name: "Kargo", href: "/kargo", icon: Truck },
   { name: "Müşteri", href: "/sohbet", icon: MessageSquare },
+  { name: "Profil", href: "/profil", icon: UserCircle },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { logout } = useAuth();
 
   return (
     <>
@@ -44,6 +49,16 @@ export default function Sidebar() {
             );
           })}
         </nav>
+
+        <div className="px-6 pt-4 border-t border-bal-border/50">
+          <button 
+            onClick={logout}
+            className="flex items-center gap-3 w-full px-4 py-3 text-sm font-black text-bal-danger hover:bg-bal-danger/5 rounded-xl transition-all"
+          >
+            <LogOut size={18} />
+            <span>Çıkış Yap</span>
+          </button>
+        </div>
       </aside>
 
       {/* Mobile Bottom Bar */}
@@ -67,3 +82,4 @@ export default function Sidebar() {
     </>
   );
 }
+
