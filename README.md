@@ -44,21 +44,37 @@ Yuksek seviye akis:
 - AI: Gemini 2.5 Flash (agent + tool calling)
 - DB: SQLite
 
-### Mimari Diyagram (Mermaid)
+### Mimari Diyagram
 
-Aşağıdaki Mermaid diyagramı, bileşenler ve veri akışını görselleştirir. GitHub veya Mermaid destekleyen bir markdown renderer ile görüntüleyebilirsiniz.
+Aşağıdaki şema, bileşenler arasındaki etkileşimi ve veri akışını özetlemektedir:
 
-```mermaid
-flowchart TD
-	Browser[User Browser] --> Next[Next.js App]
-	Next -->|API (REST)| Backend[FastAPI Backend]
-	Backend --> Auth[Auth (JWT)]
-	Backend --> DB[SQLite (SQLAlchemy)]
-	Backend --> Agent[AI Agent (Gemini)]
-	Agent -->|Tool calling| Tools[Tools: get_order_status, check_stock, predict_stockout, notify_customers]
-	Tools --> DB
-	Agent --> Gemini[Gemini API]
-	External[External Services (optional): Courier / WhatsApp] -->|optional| Backend
+```text
++---------------------+       +-----------------------+
+|    User Browser     | <---> |   Next.js Frontend    |
++---------------------+       +-----------------------+
+                                          ^
+                                          | API (REST)
+                                          v
+                              +-----------------------+      (Opsiyonel)
+                              |   FastAPI Backend     | <--- Harici Servisler
+                              +-----------------------+      (Kargo/WhatsApp)
+                                /         |         \
+                               /          |          \
+                              v           v           v
+                        +-------+   +----------+   +-------------------+
+                        | Auth  |   | Database |   |     AI Agent      |
+                        | (JWT) |   | (SQLite) |   | (Gemini 2.5 Flash)|
+                        +-------+   +----------+   +-------------------+
+                                          ^                 |      |
+                                          |                 |      | (API Çağrısı)
+                                          | Tool Calling    v      v
+                                    +--------------------+   +------------+
+                                    |    Agent Tools     |   | Gemini API |
+                                    | - check_stock      |   +------------+
+                                    | - predict_stockout |
+                                    | - get_order_status |
+                                    | - notify_customers |
+                                    +--------------------+
 ```
 
 ### Proje Yapisi
