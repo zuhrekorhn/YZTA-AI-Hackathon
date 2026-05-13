@@ -93,7 +93,7 @@ def _run_agent(
     for _ in range(max_iterations):
         try:
             response = client.models.generate_content(
-                model="gemini-2.5-flash",
+                model="gemini-flash-latest",
                 contents=contents,
                 config=types.GenerateContentConfig(
                     system_instruction=system_prompt,
