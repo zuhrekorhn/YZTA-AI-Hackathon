@@ -11,7 +11,7 @@ Bu repo hackathon beklentilerine uygun olarak su hedefleri kapsar:
 
 ## Problem ve Cozum Ozeti
 
-KOBI'lerde su surecler genellikle manuel yurutuluyor:
+KOBI'lerde su surecler genellikle manuel yurutuluyor:::
 
 - Siparis takibi
 - Kargo gecikme yonetimi
